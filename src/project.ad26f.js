@@ -34333,13 +34333,15 @@ window.__require = function e(t, i, o) {
 				var label = rankBtn.addComponent(cc.Label);
 				label.string = "排行榜";
 				this.node.addChild(rankBtn);
-				rankBtn.y = -(this.node.height/5);
+				rankBtn.x = -200;
+				rankBtn.y = -260;
 				var shareBtnLabel = shareBtn.addComponent(cc.Label);
 				shareBtnLabel.string = "分享";
 				this.node.addChild(shareBtn);
-				shareBtn.y = rankBtn.y - 60;
+				shareBtn.y = rankBtn.y;
+				shareBtn.x += 200;
 				this.node.addChild(recomNode);		
-				recomNode.y = shareBtn.y - 100;
+				recomNode.y = -(this.node.height/5) - 160;
 				
             },
 			autoAdapteScreen:function(){
