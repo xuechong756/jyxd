@@ -34957,8 +34957,10 @@ window.__require = function e(t, i, o) {
             userName: "",
             session_key: "",
             power: 0,
-            url: "https://game.7q7q.top/sta/",
-            url2: "https://game.7q7q.top/sheep/",
+           // url: "https://game.7q7q.top/sta/",
+          //  url2: "https://game.7q7q.top/sheep/",
+			url: "",
+            url2: "",
             avatarUrl: "",
             state: 0,
             updatePower: !1,
@@ -35019,7 +35021,8 @@ window.__require = function e(t, i, o) {
                 } else if ("chrome1" == cc.sys.browserType)
                     this.openid = "test001",
                     this.userName = "\u54c8\u54c8",
-                    this.avatarUrl = "https://game.7q7q.top/img/wxgame/49234a872c294891aa98877d51679180.png",
+                    //this.avatarUrl = "https://game.7q7q.top/img/wxgame/49234a872c294891aa98877d51679180.png",
+					 this.avatarUrl = "",
                     this.fromid = "test002",
                     this.pkfromid = "test002";
                 else {
@@ -35028,7 +35031,8 @@ window.__require = function e(t, i, o) {
                     cc.sys.localStorage.setItem("openid", h)),
                     this.openid = h,
                     this.userName = "\u563f\u563f",
-                    this.avatarUrl = "https://game.7q7q.top/img/wxgame/1b6474f6563845c4a5afd5b9a797c017.png",
+                   // this.avatarUrl = "https://game.7q7q.top/img/wxgame/1b6474f6563845c4a5afd5b9a797c017.png",
+				    this.avatarUrl = "",
                     this.fromid = "test001"
                 }
             },
@@ -35250,7 +35254,7 @@ window.__require = function e(t, i, o) {
                 }
             },
             sendRequest: function(t, i, o) {
-                var n = cc.loader.getXMLHttpRequest()
+               /* var n = cc.loader.getXMLHttpRequest()
                   , a = "?";
                 for (var y in i)
                     "?" != a && (a += "&"),
@@ -35273,10 +35277,10 @@ window.__require = function e(t, i, o) {
                 return n.setRequestHeader("Authorization", "Basic " + p),
                 cc.sys.isNative && n.setRequestHeader("Accept-Encoding", "gzip,deflate", "text/html;charset=UTF-8"),
                 n.send(),
-                n
+                n*/
             },
             httpPost: function(e, t, i) {
-                var o = cc.loader.getXMLHttpRequest()
+                /*var o = cc.loader.getXMLHttpRequest()
                   , n = this.url + e;
                 console.log("RequestURL:" + n, t),
                 o.onreadystatechange = function() {
@@ -35292,7 +35296,7 @@ window.__require = function e(t, i, o) {
                 o.open("POST", n, !0),
                 cc.sys.isNative && o.setRequestHeader("Accept-Encoding", "gzip,deflate"),
                 o.timeout = 5e3,
-                o.send(t)
+                o.send(t)*/
             },
             pdatas: function(e) {
                 1 == this.state && this.sendRequest2("datas", {
@@ -35386,7 +35390,7 @@ window.__require = function e(t, i, o) {
                 })
             },
             sendRequest2: function(t, i, o, n) {
-                var a = cc.loader.getXMLHttpRequest()
+               /* var a = cc.loader.getXMLHttpRequest()
                   , y = "?";
                 for (var r in i)
                     "?" != y && (y += "&"),
@@ -35410,10 +35414,10 @@ window.__require = function e(t, i, o) {
                 a.withCredentials = !0,
                 cc.sys.isNative && a.setRequestHeader("Accept-Encoding", "gzip,deflate", "text/html;charset=UTF-8"),
                 a.send(),
-                a
+                a*/
             },
             httpPost2: function(e, t, i) {
-                var o = cc.loader.getXMLHttpRequest()
+               /* var o = cc.loader.getXMLHttpRequest()
                   , n = this.url2 + e;
                 console.log("RequestURL:" + n),
                 o.onreadystatechange = function() {
@@ -35436,7 +35440,7 @@ window.__require = function e(t, i, o) {
                     0 != y && (a += "&"),
                     a += r + "=" + t[r],
                     y++;
-                o.send(a)
+                o.send(a)*/
             }
         },
         cc._RF.pop()
@@ -36312,7 +36316,8 @@ window.__require = function e(t, i, o) {
                 if (window.wx) {
                     var i = "fromid=" + cc.qianqista.openid + "&channel=" + t
                       , o = "\u4f60\u7684\u597d\u53cb\u56f0\u5728\u73e0\u5cf0\uff0c\u5411\u4f60\u53d1\u51fa\u6c42\u6551\uff01"
-                      , n = "https://game.7q7q.top/img/wxgame/2c1d8b841759487785f368ba780b8af9.jpg";
+                     // , n = "https://game.7q7q.top/img/wxgame/2c1d8b841759487785f368ba780b8af9.jpg";
+					  , n = "";
                     if (cc.GAME.shares.length > 0) {
                         var a = Math.floor(Math.random() * cc.GAME.shares.length)
                           , y = cc.GAME.shares[a];
@@ -36387,7 +36392,8 @@ window.__require = function e(t, i, o) {
                         query: "channel=sharemenu",
                         withShareTicket: !0,
                         title: "\u4f60\u7684\u597d\u53cb\u56f0\u5728\u73e0\u5cf0\uff0c\u5411\u4f60\u53d1\u51fa\u6c42\u6551\uff01",
-                        imageUrl: "https://game.7q7q.top/img/wxgame/2c1d8b841759487785f368ba780b8af9.jpg"
+                       // imageUrl: "https://game.7q7q.top/img/wxgame/2c1d8b841759487785f368ba780b8af9.jpg"
+					   imageUrl:""
                     }
                 }),
                 wx.updateShareMenu({
