@@ -36172,7 +36172,20 @@ window.__require = function e(t, i, o) {
                 this.bannerTime = 0
             },
             showVedio: function(e) {
-                var t = this;
+				//埋点 root video
+				console.log("show video");
+				var t = this;
+                this.videocallback = e;
+				cc.GAME.hasVideo = 1;
+				
+				
+				//播放完整e(1); 不完整e(0)
+				e && e(1);
+			
+				
+				
+				
+              /*  var t = this;
                 this.videocallback = e,
                 window.wx ? (cc.GAME.hasVideo = !1,
                 this.rewardedVideoAd.show().catch(function(e) {
@@ -36186,7 +36199,7 @@ window.__require = function e(t, i, o) {
                     2 == t ? e && e(!0) : (e && e(!1),
                     cc.res.showToast("\u89c6\u9891\u51c6\u5907\u4e2d...\u8bf7\u7a0d\u540e\u518d\u8bd5")),
                     cc.res.closeUI("vedio")
-                }, !1))
+                }, !1))*/
             },
             showBanner: function(e, t, i, o) {
                 if (window.wx) {
@@ -36536,7 +36549,13 @@ window.__require = function e(t, i, o) {
                 }
             },
             onLoad: function() {
-                this.updateUI()
+                this.updateUI();
+				
+				//修改
+				//隐藏震动
+				this.vibrateBg.parent.parent.active = 0;
+				
+				console.log(this.vibrateBg.parent.parent);
             },
             initUI: function() {
                 1 == o.getMusic() ? (o.setMusic(0),
@@ -36695,7 +36714,9 @@ window.__require = function e(t, i, o) {
             onLoad: function() {
                 this.initUI(),
                 this.updateUI(),
-                this.updateAd()
+                this.updateAd();
+				
+				console.log(this.node);
             },
             initUI: function() {
                 var e = o.getSkinId();
@@ -36756,7 +36777,7 @@ window.__require = function e(t, i, o) {
             suiji: function() {
                 var e = o.getCoin();
                 if (e < this.cost)
-                    n.showToast("\u91d1\u5e01\u4e0d\u8db3!");
+                    n.showToast("金币不足!");
                 else {
                     var t = [];
                     if (0 == this.pageView.getCurrentPageIndex())
@@ -36796,7 +36817,7 @@ window.__require = function e(t, i, o) {
                     this.game && this.game.changePeopleSkin()
                 }
             },
-            show: function() {
+            show: function(event) {
                 this.game = cc.find("Canvas").getComponent("game"),
                 this.node.sc = this,
                 cc.sdk.showSpot(),
