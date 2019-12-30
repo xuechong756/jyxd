@@ -34294,7 +34294,34 @@ window.__require = function e(t, i, o) {
                 this.initUI(),
                 this.updateUI(),
                 cc.sdk.aldSendEvent("\u8fdb\u5165\u6e38\u620f\u9996\u9875"),
-                cc.sdk.hideBanner()
+                cc.sdk.hideBanner();
+				
+				var recomNode = new cc.Node();
+				var rankBtn = new cc.Node();
+				var lable = recomNode.addComponent(cc.Label);
+                lable.string = "更多好玩";
+                lable.fontSize = 50;
+                lable.lineHeight = 50;
+				var action = cc.sequence(cc.scaleTo(.5, 1.2), cc.scaleTo(.5, 0.9));
+				action = cc.repeatForever(action);
+                recomNode.runAction(action);
+                recomNode.on(cc.Node.EventType.TOUCH_START, function(){
+                    //埋点 推荐更多好玩
+                    console.log("more game");
+					window.h5api && window.h5api.showRecommend();
+                }, this);	
+				rankBtn.on(cc.Node.EventType.TOUCH_START, function(){
+                    //埋点 排行榜
+                    console.log("ranking");
+				
+                }, this);	
+				var label = rankBtn.addComponent(cc.Label);
+				label.string = "排行榜";
+				this.node.addChild(rankBtn);
+				rankBtn.y = -(this.node.height/5);
+				this.node.addChild(recomNode);		
+				recomNode.y = rankBtn.y - 160;
+				
             },
 			autoAdapteScreen:function(){
 				// 适配解决方案
