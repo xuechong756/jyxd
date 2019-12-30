@@ -33297,8 +33297,10 @@ window.__require = function e(t, i, o) {
 				var video = cc.find("bg/fuhuo/video", this.node);
 				
 				//埋点 激励用完隐藏，不用定时
-				sanbei.active = 0;
-				video.active = sanbei.active ;
+				window.h5api && window.h5api.canPlayAd(function(data){
+					sanbei.active = data.canPlayAd;
+					video.active = sanbei.active ;
+				}.bind(this));
 				
 				//没有激励需要执行下面
 				//this.fangqiFuhuo();
@@ -34298,6 +34300,7 @@ window.__require = function e(t, i, o) {
 				
 				var recomNode = new cc.Node();
 				var rankBtn = new cc.Node();
+				var shareBtn = new cc.Node();
 				var lable = recomNode.addComponent(cc.Label);
                 lable.string = "更多好玩";
                 lable.fontSize = 50;
@@ -34307,20 +34310,36 @@ window.__require = function e(t, i, o) {
                 recomNode.runAction(action);
                 recomNode.on(cc.Node.EventType.TOUCH_START, function(){
                     //埋点 推荐更多好玩
-                    console.log("more game");
+                   // console.log("more game");
 					window.h5api && window.h5api.showRecommend();
                 }, this);	
 				rankBtn.on(cc.Node.EventType.TOUCH_START, function(){
                     //埋点 排行榜
-                    console.log("ranking");
-				
+					// console.log("ranking");
+                    if(window.h5api){
+						if (window.h5api.isLogin()) {
+						 window.h5api.showRanking();
+						} else if (confirm("登录后才能看到好友哦~")) {
+							window.h5api.login(function (obj) { });
+						}
+					}
                 }, this);	
+				shareBtn.on(cc.Node.EventType.TOUCH_START, function(){
+					//埋点 分享
+					// console.log("share");
+					window.h5api && window.h5api.share();
+				}, this);
+				
 				var label = rankBtn.addComponent(cc.Label);
 				label.string = "排行榜";
 				this.node.addChild(rankBtn);
 				rankBtn.y = -(this.node.height/5);
+				var shareBtnLabel = shareBtn.addComponent(cc.Label);
+				shareBtnLabel.string = "分享";
+				this.node.addChild(shareBtn);
+				shareBtn.y = rankBtn.y - 60;
 				this.node.addChild(recomNode);		
-				recomNode.y = rankBtn.y - 160;
+				recomNode.y = shareBtn.y - 100;
 				
             },
 			autoAdapteScreen:function(){
@@ -36172,7 +36191,10 @@ window.__require = function e(t, i, o) {
                 t && t()) : t && t()*/
 				t && t();
 				//埋点 分数上报
-				console.log("score:" + Math.floor(e));
+				//console.log("score:" + Math.floor(e));
+				if (window.h5api && window.h5api.isLogin()) {
+                    window.h5api.submitRanking(Math.floor(e), function (data) { });
+                }
             },
             openRank: function(e) {
                 window.wx && wx.postMessage({
@@ -36238,12 +36260,20 @@ window.__require = function e(t, i, o) {
                 this.videocallback = e;
 				cc.GAME.hasVideo = 1;
 				
-				
-				//播放完整e(1); 不完整e(0)
-				e && e(1);
-			
-				
-				
+				if(window.h5api && confirm("是否播放视频,获得相应奖励？")){
+					window.h5api.playAd(function(obj){
+						console.log('代码:' + obj.code + ',消息:' + obj.message);
+						if (obj.code === 10000) {
+							console.log('开始播放');
+						} else if (obj.code === 10001) {
+							//播放完整e(1); 不完整e(0)
+							e && e(1);
+						} else {
+							e && e(0);
+						}
+					}.bind(this));
+				}
+
 				
               /*  var t = this;
                 this.videocallback = e,
@@ -36674,9 +36704,11 @@ window.__require = function e(t, i, o) {
             onLoad: function() {
 				
 				//埋点 没有激励需要执行下面
-				{
-					this.closeThis();
-				}
+				window.h5api && window.h5api.canPlayAd(function(data){
+					if(!data.canPlayAd){
+						this.closeThis();
+					}
+				}.bind(this));
 			},
             initUI: function() {
                 this.btn_lingqu = cc.find("box/lingqu", this.node).getComponent(cc.Button),
@@ -36790,8 +36822,10 @@ window.__require = function e(t, i, o) {
 				
 				//埋点 激励用完需要隐藏
 				this.TimeCheckAd = setInterval(function(){
-					//btn_coin.active = 0;
-				}, 500);
+					window.h5api && window.h5api.canPlayAd(function(data){
+						btn_coin.active = data.canPlayAd;
+					}.bind(this));
+				}.bind(this), 500);
             },
 			onDestroy:function(){
 				clearInterval(this.TimeCheckAd);
