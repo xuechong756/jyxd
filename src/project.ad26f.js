@@ -36716,8 +36716,17 @@ window.__require = function e(t, i, o) {
                 this.updateUI(),
                 this.updateAd();
 				
-				console.log(this.node);
+				var btn_coin = this.node.getChildByName("bg").getChildByName("box");
+				btn_coin = btn_coin.getChildByName("btn_coin");
+				
+				//埋点 激励用完需要隐藏
+				this.TimeCheckAd = setInterval(function(){
+					//btn_coin.active = 0;
+				}, 500);
             },
+			onDestroy:function(){
+				clearInterval(this.TimeCheckAd);
+			},
             initUI: function() {
                 var e = o.getSkinId();
                 this.items = [];
