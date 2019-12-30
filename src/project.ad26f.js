@@ -33287,7 +33287,23 @@ window.__require = function e(t, i, o) {
         cc.Class({
             extends: cc.Component,
             properties: {},
-            onLoad: function() {},
+            onLoad: function() {
+				
+			},
+			start:function(){
+			
+				var win = cc.find("bg/win", this.node);
+				var sanbei = cc.find("sanbei", win);
+				var video = cc.find("bg/fuhuo/video", this.node);
+				
+				//埋点 激励用完隐藏，不用定时
+				sanbei.active = 0;
+				video.active = sanbei.active ;
+				
+				//没有激励需要执行下面
+				//this.fangqiFuhuo();
+				
+			},
             initUI: function() {
                 if (this.bg = cc.find("bg", this.node),
                 this.win = cc.find("win", this.bg),
@@ -33768,7 +33784,21 @@ window.__require = function e(t, i, o) {
         cc.Class({
             extends: cc.Component,
             properties: {},
-            onLoad: function() {},
+            onLoad: function() {
+				var pro = this.node.getChildByName("pro");
+				var baoxiang1 = pro.getChildByName("baoxiang1");
+				var baoxiang2 = pro.getChildByName("baoxiang2");
+				var baoxiang3 = pro.getChildByName("baoxiang3");
+				
+				this.TimerCheckAd = setInterval(function(){
+				//	baoxiang1.active = 0;
+					//baoxiang2.active = baoxiang1.active;
+					//baoxiang3.active = baoxiang1.active;
+				}, 500);
+			},
+			onDestroy:function(){
+				clearInterval(this.TimerCheckAd);
+			},
             initUI: function() {
                 this.box = cc.find("box", this.node),
                 this.item = cc.find("scroll/view/item", this.box),
@@ -36108,11 +36138,14 @@ window.__require = function e(t, i, o) {
                 })
             },
             uploadScore: function(e, t) {
-                window.wx ? (wx.postMessage({
+               /* window.wx ? (wx.postMessage({
                     message: "updateScore",
                     score: Math.floor(e)
                 }),
-                t && t()) : t && t()
+                t && t()) : t && t()*/
+				t && t();
+				//埋点 分数上报
+				console.log("score:" + Math.floor(e));
             },
             openRank: function(e) {
                 window.wx && wx.postMessage({
@@ -36611,7 +36644,13 @@ window.__require = function e(t, i, o) {
         cc.Class({
             extends: cc.Component,
             properties: {},
-            onLoad: function() {},
+            onLoad: function() {
+				
+				//埋点 没有激励需要执行下面
+				{
+					this.closeThis();
+				}
+			},
             initUI: function() {
                 this.btn_lingqu = cc.find("box/lingqu", this.node).getComponent(cc.Button),
                 this.box = cc.find("box", this.node),
@@ -36669,8 +36708,7 @@ window.__require = function e(t, i, o) {
             },
             click: function(e, t) {
                 if ("close" == t)
-                    this.hide(),
-                    cc.sdk.showSpot();
+					this.closeThis();
                 else if ("lingqu" == t) {
                     var i = this;
                     this.shiyongNum < 1 ? (i.lingqu(!0),
@@ -36682,7 +36720,11 @@ window.__require = function e(t, i, o) {
                 }
                 o.playSound(n.audio_button),
                 cc.log(t)
-            }
+            },
+			closeThis:function(){
+				this.hide(),
+                cc.sdk.showSpot();
+			},
         }),
         cc._RF.pop()
     }
