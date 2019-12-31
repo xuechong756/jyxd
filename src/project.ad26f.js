@@ -34307,8 +34307,8 @@ window.__require = function e(t, i, o) {
 				var shareBtn = new cc.Node();
 				var lable = recomNode.addComponent(cc.Label);
                 lable.string = "更多好玩";
-                lable.fontSize = 36;
-                lable.lineHeight = 36;
+                lable.fontSize = 30;
+                lable.lineHeight = 30;
 				var action = cc.sequence(cc.scaleTo(.5, 1.2), cc.scaleTo(.5, 0.9));
 				action = cc.repeatForever(action);
                 recomNode.runAction(action);
@@ -34316,7 +34316,7 @@ window.__require = function e(t, i, o) {
 				var startGameBtn = node_main.getChildByName("btn_start");
 				node_main.addChild(recomNode);		
 				recomNode.x = startGameBtn.x;
-				recomNode.y = startGameBtn.y - startGameBtn.height/1.3;
+				recomNode.y = startGameBtn.y - startGameBtn.height/1.6;
 				
                 recomNode.on(cc.Node.EventType.TOUCH_START, function(){
                     //埋点 推荐更多好玩
@@ -37218,7 +37218,7 @@ window.__require = function e(t, i, o) {
                 cc.sys.localStorage.setItem(this.pfix + "qiandao_num", e)
             },
             getQianDaoNum: function() {
-                var e = cc.sys.localStorage.getItem(this.pfix + "qiandao_num");
+                var e = cc.sys.localStorage.getItem(this.pfix + "qiandao_num");				
                 return e = e || 0,
                 Number(e)
             },
@@ -37233,6 +37233,11 @@ window.__require = function e(t, i, o) {
             },
             getQianDaoTag: function() {
                 var e = cc.sys.localStorage.getItem(this.pfix + "qiandao_tag");
+				if(e){
+					e += 1;
+				}else{
+					e = 1;
+				}
                 return e = e || 0,
                 Number(e)
             },
