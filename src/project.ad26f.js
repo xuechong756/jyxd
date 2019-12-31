@@ -34351,7 +34351,6 @@ window.__require = function e(t, i, o) {
 				shareBtn.y = rankBtn.y;
 				shareBtn.x += 200;
 				
-				//console.log(this.node);
             },
 			autoAdapteScreen:function(){
 				// 适配解决方案
@@ -34397,7 +34396,8 @@ window.__require = function e(t, i, o) {
                 cc.find("btn_start", this.node).zIndex = e
             },
             start: function() {
-                this.node_pageview.scrollToPage(this.currSelPageNum, 1.1)
+                this.node_pageview.scrollToPage(this.currSelPageNum, 1.1);
+				
             },
             updateUI: function() {
                 var e = n.getLevel();
