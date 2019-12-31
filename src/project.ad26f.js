@@ -34307,8 +34307,8 @@ window.__require = function e(t, i, o) {
 				var shareBtn = new cc.Node();
 				var lable = recomNode.addComponent(cc.Label);
                 lable.string = "更多好玩";
-                lable.fontSize = 50;
-                lable.lineHeight = 50;
+                lable.fontSize = 36;
+                lable.lineHeight = 36;
 				var action = cc.sequence(cc.scaleTo(.5, 1.2), cc.scaleTo(.5, 0.9));
 				action = cc.repeatForever(action);
                 recomNode.runAction(action);
@@ -34316,7 +34316,7 @@ window.__require = function e(t, i, o) {
 				var startGameBtn = node_main.getChildByName("btn_start");
 				node_main.addChild(recomNode);		
 				recomNode.x = startGameBtn.x;
-				recomNode.y = startGameBtn.y - startGameBtn.height/1.1;
+				recomNode.y = startGameBtn.y - startGameBtn.height/1.3;
 				
                 recomNode.on(cc.Node.EventType.TOUCH_START, function(){
                     //埋点 推荐更多好玩
@@ -34351,7 +34351,7 @@ window.__require = function e(t, i, o) {
 				shareBtn.y = rankBtn.y;
 				shareBtn.x += 200;
 				
-				console.log(this.node);
+				//console.log(this.node);
             },
 			autoAdapteScreen:function(){
 				// 适配解决方案
@@ -35292,7 +35292,7 @@ window.__require = function e(t, i, o) {
                 })
             },
             uploaddatas: function(e, t) {
-                if (1 == this.state) {
+             /*   if (1 == this.state) {
                     this.httpPost("uploaddatas", {
                         gameId: this.gameId,
                         openid: this.openid,
@@ -35301,7 +35301,7 @@ window.__require = function e(t, i, o) {
                         console.log("uploaddatas:", e),
                         t && t(e)
                     })
-                }
+                }*/
             },
             getOpenId: function(e) {
                 var t = this;
@@ -35326,7 +35326,7 @@ window.__require = function e(t, i, o) {
                 }) : e && e()
             },
             getGrpupId: function(e, t, i) {
-                if (1 == this.state) {
+             /*   if (1 == this.state) {
                     window.wx && this.httpPost("groupid", {
                         encryptedData: e,
                         sessionkey: this.session_key,
@@ -35340,7 +35340,7 @@ window.__require = function e(t, i, o) {
                         }
                         console.log("groupid:", e)
                     })
-                }
+                }*/
             },
             sendRequest: function(t, i, o) {
                /* var n = cc.loader.getXMLHttpRequest()
@@ -35396,7 +35396,7 @@ window.__require = function e(t, i, o) {
                 })
             },
             paddUser: function(e, t) {
-                if (1 == this.state) {
+              /*  if (1 == this.state) {
                     if (this.avatarUrl.length < 5 || 0 == this.power)
                         return void (e && e(null));
                     var i = this.avatarUrl;
@@ -35410,10 +35410,10 @@ window.__require = function e(t, i, o) {
                         console.log("addUser:", t),
                         e && e(t)
                     })
-                }
+                }*/
             },
             pupdateInfo: function(e) {
-                if (1 == this.state) {
+              /*  if (1 == this.state) {
                     if (this.avatarUrl.length < 5)
                         return void (e && e(null));
                     var t = this.avatarUrl;
@@ -35426,7 +35426,7 @@ window.__require = function e(t, i, o) {
                         console.log("updateInfo:", t),
                         e && e(t)
                     })
-                }
+                }*/
             },
             uploadScore: function(e) {
                 1 == this.state && (e = Math.floor(e),
