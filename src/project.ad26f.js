@@ -34350,7 +34350,6 @@ window.__require = function e(t, i, o) {
 				this.node.addChild(shareBtn);
 				shareBtn.y = rankBtn.y;
 				shareBtn.x += 200;
-				
             },
 			autoAdapteScreen:function(){
 				// 适配解决方案
@@ -34398,6 +34397,13 @@ window.__require = function e(t, i, o) {
             start: function() {
                 this.node_pageview.scrollToPage(this.currSelPageNum, 1.1);
 				
+				//修改
+				var nodelvup = cc.find("node_main/nodelvup", this.node);
+				var layout = nodelvup.getComponent(cc.Layout);
+				layout.resizeMode = 1;
+				layout.padding = 0;
+				nodelvup.color = new cc.Color(249,187,80, 255);
+
             },
             updateUI: function() {
                 var e = n.getLevel();
@@ -36783,12 +36789,19 @@ window.__require = function e(t, i, o) {
 					this.closeThis();
                 else if ("lingqu" == t) {
                     var i = this;
-                    this.shiyongNum < 1 ? (i.lingqu(!0),
-                    cc.qianqista.event("\u76ae\u80a4\u8bd5\u7528_\u514d\u8d39")) : (cc.sdk.showVedio(function(e) {
+					//修改
+					(cc.sdk.showVedio(function(e) {
                         e && i.lingqu(!0)
                     }),
-                    cc.qianqista.event("\u76ae\u80a4\u8bd5\u7528_\u89c6\u9891"),
-                    cc.sdk.aldSendEvent("\u89c2\u770b\u89c6\u9891\u76ae\u80a4\u8bd5\u7528"))
+                    cc.qianqista.event("皮肤试用_视频"),
+                    cc.sdk.aldSendEvent("观看视频皮肤试用"));
+					
+                   /* this.shiyongNum < 1 ? (i.lingqu(!0),
+                    cc.qianqista.event("皮肤试用_免费")) : (cc.sdk.showVedio(function(e) {
+                        e && i.lingqu(!0)
+                    }),
+                    cc.qianqista.event("皮肤试用_视频"),
+                    cc.sdk.aldSendEvent("观看视频皮肤试用"))*/
                 }
                 o.playSound(n.audio_button),
                 cc.log(t)
@@ -37233,9 +37246,7 @@ window.__require = function e(t, i, o) {
             },
             getQianDaoTag: function() {
                 var e = cc.sys.localStorage.getItem(this.pfix + "qiandao_tag");
-				if(e){
-					e += 1;
-				}else{
+				if(!e){
 					e = 1;
 				}
                 return e = e || 0,
