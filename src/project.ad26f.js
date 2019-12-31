@@ -32693,7 +32693,12 @@ window.__require = function e(t, i, o) {
                 this.initData(),
                 this.initUI(),
                 this.initGame(),
-                this.addListener()
+                this.addListener();
+				
+				var levelBack = cc.find("level", this.node_main);
+				levelBack.on(cc.Node.EventType.TOUCH_END, function(){
+					cc.director.loadScene("main");
+				}, this);
             },
 			autoAdapteScreen:function(){
 				// 适配解决方案
@@ -33409,11 +33414,8 @@ window.__require = function e(t, i, o) {
                 cc.storage.setShiyongId(0)
             },
             next: function() {
-                var e = o.getTili();
-                e <= 0 ? n.openUI("freetili") : (o.setTili(e - 1),
-                o.uploadTili(),
-                this.game.initGame(),
-                this.hide())
+                cc.GAME.currLevel += 1;
+                this.again();
             },
             again: function() {
                 var e = o.getTili();
@@ -33429,8 +33431,9 @@ window.__require = function e(t, i, o) {
                 o.setCoin(e + this.award),
                 cc.res.showToast("\u91d1\u5e01+" + this.award),
                 this.scheduleOnce(function() {
-                    cc.director.loadScene("main")
-                }, 1)
+                       //cc.director.loadScene("main");
+					this.next();
+                }.bind(this), 1)
             },
             sanbei: function() {
                 this.sanbeiBtn.interactable = !1,
@@ -33439,8 +33442,9 @@ window.__require = function e(t, i, o) {
                 o.setCoin(e + 3 * this.award),
                 cc.res.showToast("\u91d1\u5e01+" + 3 * this.award),
                 this.scheduleOnce(function() {
-                    cc.director.loadScene("main")
-                }, 1)
+                   // cc.director.loadScene("main");
+				   	this.next();
+                }.bind(this), 1)
             },
             show: function(e) {
                 this.isWin = e,
@@ -34308,6 +34312,12 @@ window.__require = function e(t, i, o) {
 				var action = cc.sequence(cc.scaleTo(.5, 1.2), cc.scaleTo(.5, 0.9));
 				action = cc.repeatForever(action);
                 recomNode.runAction(action);
+				var node_main = this.node.getChildByName("node_main");
+				var startGameBtn = node_main.getChildByName("btn_start");
+				node_main.addChild(recomNode);		
+				recomNode.x = startGameBtn.x;
+				recomNode.y = startGameBtn.y - startGameBtn.height/1.1;
+				
                 recomNode.on(cc.Node.EventType.TOUCH_START, function(){
                     //埋点 推荐更多好玩
                    // console.log("more game");
@@ -34340,9 +34350,8 @@ window.__require = function e(t, i, o) {
 				this.node.addChild(shareBtn);
 				shareBtn.y = rankBtn.y;
 				shareBtn.x += 200;
-				this.node.addChild(recomNode);		
-				recomNode.y = -(this.node.height/5) - 160;
 				
+				console.log(this.node);
             },
 			autoAdapteScreen:function(){
 				// 适配解决方案
@@ -34953,7 +34962,9 @@ window.__require = function e(t, i, o) {
                     y.active = !1)
                 }
                 this.btn_lingqu.interactable = 1 == o.getQianDaoTag(),
-                e >= this.awards.length && (this.btn_lingqu.interactable = !1)
+                e >= this.awards.length && (this.btn_lingqu.interactable = !1);
+				
+				
             },
             lingqu: function() {
                 var e = o.getQianDaoNum();
