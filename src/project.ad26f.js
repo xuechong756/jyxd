@@ -36415,7 +36415,7 @@ window.__require = function e(t, i, o) {
 				
 				var btnLeft = btnLeftNode.addComponent(cc.Label);
 				btnLeft.string = "取消";
-				btnLeft.fontSize = 28;
+				btnLeft.fontSize = 30;
 				btnLeft.lineHeight = btnLeft.fontSize;
 				btnLeftNode.x = -dialongWinWith/4 ;
 				btnLeftNode.y = -dialongWinHeight/4 ;
@@ -36435,7 +36435,7 @@ window.__require = function e(t, i, o) {
 				btnRightNode.color = new cc.Color(0, 0, 0, 255);
 				var btnRight = btnRightNode.addComponent(cc.Label);
 				btnRight.string = "确定";
-				btnRight.fontSize = btnLeft.fontSize;
+				btnRight.fontSize = btnLeft.fontSize + 10;
 				btnRight.lineHeight = btnRight.fontSize;
 				btnRightNode.x = dialongWinWith/4 ;
 				btnRightNode.y = -dialongWinHeight/4;
@@ -36452,11 +36452,12 @@ window.__require = function e(t, i, o) {
 				
 				markNode.addComponent(cc.BlockInputEvents);
 				markNode.addChild(dialogNode);
-				
+				markNode.zIndex = cc.macro.MAX_ZINDEX;
 				if(viewNode){
 					viewNode.addChild(markNode);
 				}else{
 					var can = cc.director.getScene().getChildByName("Canvas");
+					
 					can.addChild(markNode);
 				}
 			},
